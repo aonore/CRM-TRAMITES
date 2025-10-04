@@ -2,7 +2,7 @@
   "name": "crm-tramites",
   "version": "1.0.0",
   "description": "CRM Gestoría Romero",
-  "main": "index.js",
+  "main": "layout.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
