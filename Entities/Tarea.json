@@ -1,0 +1,59 @@
+{
+  "name": "Tarea",
+  "type": "object",
+  "properties": {
+    "cliente_id": {
+      "type": "string",
+      "description": "ID del cliente asociado"
+    },
+    "titulo": {
+      "type": "string",
+      "description": "Título de la tarea"
+    },
+    "descripcion": {
+      "type": "string",
+      "description": "Descripción detallada"
+    },
+    "estado": {
+      "type": "string",
+      "enum": [
+        "iniciada",
+        "en_proceso",
+        "finalizada",
+        "cobrada"
+      ],
+      "default": "iniciada",
+      "description": "Estado actual de la tarea"
+    },
+    "monto": {
+      "type": "number",
+      "default": 0,
+      "description": "Monto del trabajo"
+    },
+    "fecha_inicio": {
+      "type": "string",
+      "format": "date",
+      "description": "Fecha de inicio"
+    },
+    "fecha_finalizacion": {
+      "type": "string",
+      "format": "date",
+      "description": "Fecha de finalización"
+    },
+    "fecha_cobro": {
+      "type": "string",
+      "format": "date",
+      "description": "Fecha de cobro"
+    },
+    "ultima_actualizacion": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Última vez que se actualizó la tarea"
+    }
+  },
+  "required": [
+    "cliente_id",
+    "titulo",
+    "estado"
+  ]
+}

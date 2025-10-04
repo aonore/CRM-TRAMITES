@@ -1,0 +1,48 @@
+{
+  "name": "Cliente",
+  "type": "object",
+  "properties": {
+    "nombre_completo": {
+      "type": "string",
+      "description": "Nombre completo del cliente"
+    },
+    "empresa": {
+      "type": "string",
+      "description": "Nombre de la empresa"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email de contacto"
+    },
+    "telefono": {
+      "type": "string",
+      "description": "Teléfono de contacto"
+    },
+    "direccion": {
+      "type": "string",
+      "description": "Dirección física"
+    },
+    "ciudad": {
+      "type": "string",
+      "description": "Ciudad"
+    },
+    "pais": {
+      "type": "string",
+      "description": "País"
+    },
+    "notas": {
+      "type": "string",
+      "description": "Notas adicionales sobre el cliente"
+    },
+    "dias_alerta": {
+      "type": "number",
+      "default": 7,
+      "description": "Días sin actividad para mostrar alerta"
+    }
+  },
+  "required": [
+    "nombre_completo",
+    "email"
+  ]
+}
