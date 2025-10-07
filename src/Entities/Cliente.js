@@ -1,4 +1,4 @@
-const Cliente = {
+const clientes = {
   cliente_id: "1",
   nombre_completo: "ARIEL GUILLERMO ONORE",
   empresa: "CN SERVICIOS INFORMATICOS",
@@ -11,4 +11,4 @@ const Cliente = {
   dias_alerta: 7,
 };
 
-export default Cliente;
+export default clientes;

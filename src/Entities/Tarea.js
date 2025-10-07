@@ -1,4 +1,4 @@
-const Tarea = {
+const tareas = {
   titulo: "PRUEBA",
   descripcion: "TAREA DE PRUEBA",
   fecha_vencimiento: "10/10/2025",
@@ -7,4 +7,4 @@ const Tarea = {
   notas: "",
 };
 
-export default Tarea;
+export default tareas;
