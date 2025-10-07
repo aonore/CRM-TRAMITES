@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import clientes from "@/Entities/Cliente";
-import tareas from "@/Entities/Tarea";
+import clientesData from "@/Entities/Cliente";
+import tareasData from "@/Entities/Tarea";
 import { Users, CheckSquare, DollarSign, AlertTriangle, FileText } from "lucide-react";
 import Button from "@/components/ui/button";
 import Skeleton from "@/components/ui/skeleton";
@@ -19,11 +19,10 @@ export default function Dashboard() {
     loadData();
   }, []);
 
-  const loadData = async () => {
+ const loadData = async () => {
   setIsLoading(true);
-  // Simula carga asíncrona si quieres
-  setClientes(clientes);
-  setTareas(tareas);
+  setClientes(clientesData);
+  setTareas(tareasData);
   setIsLoading(false);
 };
 
