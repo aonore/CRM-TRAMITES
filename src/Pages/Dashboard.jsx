@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Cliente } from "@/entities/Cliente";
-import { Tarea } from "@/entities/Tarea";
+import Cliente from "@/Entities/Cliente";
+import Tarea from "@/Entities/Tarea";
 import { Users, CheckSquare, DollarSign, AlertTriangle, FileText } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
+import Button from "@/components/ui/button";
+import Skeleton from "@/components/ui/skeleton";
 
 import StatCard from "../components/dashboard/StatCard";
 import AlertsList from "../components/dashboard/AlertsList";

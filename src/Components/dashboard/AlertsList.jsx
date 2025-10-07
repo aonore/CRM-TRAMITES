@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertTriangle, Clock } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import Badge from "@/Components/ui/badge";
 import { differenceInDays, format } from "date-fns";
 import { es } from "date-fns/locale";
 import { motion, AnimatePresence } from "framer-motion";
-import { User } from "@/entities/User";
+import User from "@/Entities/user";
 
 export default function AlertsList({ tareas, clientes }) {
   const [diasAlertaGlobal, setDiasAlertaGlobal] = useState(7);

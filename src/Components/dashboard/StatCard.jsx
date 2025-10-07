@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/Components/ui/card";
 import { motion } from "framer-motion";
 
 export default function StatCard({ title, value, icon: Icon, gradient, trend, subtitle }) {

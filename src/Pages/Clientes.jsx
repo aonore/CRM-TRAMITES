@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import ClienteForm from "../components/clientes/ClienteForm";
-import ClienteCard from "../components/clientes/ClienteCard";
+import ClienteCard from "../Components/clientes/ClienteCard";
 
 export default function Clientes() {
   const [clientes, setClientes] = useState([]);
