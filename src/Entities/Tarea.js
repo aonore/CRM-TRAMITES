@@ -1,9 +1,9 @@
 const Tarea = {
-  titulo: "",
-  descripcion: "",
-  fecha_vencimiento: "",
-  estado: "",
-  cliente_id: "",
+  titulo: "PRUEBA",
+  descripcion: "TAREA DE PRUEBA",
+  fecha_vencimiento: "10/10/2025",
+  estado: "INICIADA",
+  cliente_id: "1",
   notas: "",
 };
 
