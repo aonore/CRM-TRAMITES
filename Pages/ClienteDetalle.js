@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Cliente } from "@/entities/Cliente";
 import { Tarea } from "@/entities/Tarea";

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { LayoutDashboard, Users, CheckSquare, DollarSign, LogOut } from "lucide-react";
+import { LayoutDashboard, Users, CheckSquare, DollarSign, LogOut, Settings } from "lucide-react"; // Added Settings import
 import { User } from "@/entities/User";
 import {
   Sidebar,
@@ -38,6 +38,11 @@ const navigationItems = [
     title: "Cobros",
     url: createPageUrl("Cobros"),
     icon: DollarSign,
+  },
+  {
+    title: "Configuración",
+    url: createPageUrl("Configuracion"),
+    icon: Settings,
   },
 ];
 

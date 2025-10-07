@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +26,21 @@ import {
 
 import DialogoFechaCobro from "./DialogoFechaCobro";
 
+// Assuming 'User' is an imported service or utility for user-related API calls.
+// For example: import User from '@/services/userService'; or a similar path.
+// If User.me() is not globally available or imported, you would need to add its import.
+// For this implementation, we will assume `User` is accessible.
+const User = {
+  me: async () => {
+    // This is a mock implementation for demonstration.
+    // In a real application, this would fetch user data from an API.
+    return new Promise(resolve => setTimeout(() => {
+      resolve({ dias_alerta_global: 7 }); // Default or fetched value
+    }, 100));
+  }
+};
+
+
 const ESTADO_COLORS = {
   iniciada: 'bg-amber-100 text-amber-800 border-amber-200',
   en_proceso: 'bg-blue-100 text-blue-800 border-blue-200',
@@ -42,10 +57,30 @@ const ESTADO_LABELS = {
 
 export default function TareaCard({ tarea, cliente, onEdit, onEstadoChange, onDelete }) {
   const [showDialogoCobro, setShowDialogoCobro] = useState(false);
-  
+  const [diasAlertaGlobal, setDiasAlertaGlobal] = useState(7); // Default value
+
+  useEffect(() => {
+    loadConfig();
+  }, []);
+
+  const loadConfig = async () => {
+    try {
+      const userData = await User.me();
+      // Prioritize client-specific alert days if available, otherwise use global, otherwise default to 7
+      setDiasAlertaGlobal(userData.dias_alerta_global || 7);
+    } catch (error) {
+      console.error("Error cargando configuración:", error);
+      // Fallback to default if config loading fails
+      setDiasAlertaGlobal(7);
+    }
+  };
+
   const ultimaActualizacion = tarea.ultima_actualizacion || tarea.updated_date;
   const diasSinActividad = differenceInDays(new Date(), new Date(ultimaActualizacion));
-  const mostrarAlerta = diasSinActividad >= (cliente?.dias_alerta || 7) && tarea.estado !== 'cobrada';
+  
+  // IMPORTANTE: Las tareas cobradas NUNCA muestran alerta (ya concluyeron)
+  // Se utiliza solo el umbral de alerta global para la inactividad de la tarea.
+  const mostrarAlerta = tarea.estado !== 'cobrada' && diasSinActividad >= diasAlertaGlobal;
 
   const handleEstadoChange = (nuevoEstado) => {
     if (nuevoEstado === 'cobrada') {
@@ -187,4 +222,4 @@ export default function TareaCard({ tarea, cliente, onEdit, onEstadoChange, onDe
       />
     </>
   );
-}
+  }

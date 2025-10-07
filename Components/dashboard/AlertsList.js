@@ -1,25 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertTriangle, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { differenceInDays, format } from "date-fns";
 import { es } from "date-fns/locale";
 import { motion, AnimatePresence } from "framer-motion";
+import { User } from "@/entities/User";
 
 export default function AlertsList({ tareas, clientes }) {
+  const [diasAlertaGlobal, setDiasAlertaGlobal] = useState(7);
+
+  useEffect(() => {
+    loadConfig();
+  }, []);
+
+  const loadConfig = async () => {
+    try {
+      const userData = await User.me();
+      setDiasAlertaGlobal(userData.dias_alerta_global || 7);
+    } catch (error) {
+      console.error("Error cargando configuración:", error);
+    }
+  };
+
   const getClienteById = (clienteId) => {
     return clientes.find(c => c.id === clienteId);
   };
 
+  // IMPORTANTE: Excluir tareas cobradas - ya concluyeron y no necesitan seguimiento
   const tareasConAlerta = tareas.filter(tarea => {
+    // Las tareas cobradas NO deben generar alertas
     if (tarea.estado === 'cobrada') return false;
-    const cliente = getClienteById(tarea.cliente_id);
-    if (!cliente) return false;
     
     const ultimaActualizacion = tarea.ultima_actualizacion || tarea.updated_date;
     const diasSinActividad = differenceInDays(new Date(), new Date(ultimaActualizacion));
     
-    return diasSinActividad >= (cliente.dias_alerta || 7);
+    // Solo mostrar alerta si supera los días configurados
+    return diasSinActividad >= diasAlertaGlobal;
   });
 
   return (
@@ -28,6 +45,9 @@ export default function AlertsList({ tareas, clientes }) {
         <CardTitle className="flex items-center gap-2 text-lg font-bold text-slate-900">
           <AlertTriangle className="w-5 h-5 text-amber-500" />
           Alertas de Inactividad
+          <Badge variant="outline" className="ml-auto">
+            {diasAlertaGlobal} días configurados
+          </Badge>
         </CardTitle>
       </CardHeader>
       <CardContent className="p-4">
@@ -35,6 +55,12 @@ export default function AlertsList({ tareas, clientes }) {
           <div className="text-center py-8">
             <Clock className="w-12 h-12 text-slate-300 mx-auto mb-3" />
             <p className="text-slate-500 text-sm">No hay tareas con alertas</p>
+            <p className="text-xs text-slate-400 mt-1">
+              Las tareas inactivas por más de {diasAlertaGlobal} días aparecerán aquí
+            </p>
+            <p className="text-xs text-slate-400 mt-1">
+              (Las tareas cobradas no generan alertas)
+            </p>
           </div>
         ) : (
           <div className="space-y-3 max-h-96 overflow-y-auto">
